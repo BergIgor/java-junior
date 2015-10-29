@@ -2,8 +2,7 @@ package com.acme.edu;
 
 public class Logger {
 
-    private static void print(String str)
-    {
+    private static void print(String str) {
         System.out.println(str);
     }
 
