@@ -2,15 +2,32 @@ package com.acme.edu;
 
 public class Logger {
 
-
+    private static int COUNT=0;
     /** Print integer
      *
      * @param message - int will be printed
      */
     public static void log(int message) {
-        Logger.print("primitive: " + message);
+        if(message==0) {
+            if (COUNT > 0) {
+                Logger.print("primitive: " + COUNT);
+                COUNT = 0;
+            }
+            Logger.print("primitive: " + message);
+        }
+        if(message + COUNT < 0) {
+            Logger.print("primitive: " + COUNT);
+            Logger.print("primitive: "  + message);
+
+        }
+        COUNT+=message;
+
     }
 
+    public static void log(byte message) {
+            Logger.print("primitive: " + message);
+
+    }
     /** Print boolean
      *
      * @param message - boolean value will be printed
@@ -32,7 +49,11 @@ public class Logger {
      * @param message - String will be printed
      */
     public static void log(String message) {
+        if(COUNT>0){
+            Logger.print("primitive: " + COUNT);
+        }
         Logger.print("string: " + message);
+        COUNT =0;
     }
     /** Print Object
      *
@@ -44,5 +65,8 @@ public class Logger {
 
     private static void print(String str) {
         System.out.println(str);
+
     }
+
+
 }
