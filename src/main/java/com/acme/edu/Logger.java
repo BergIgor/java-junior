@@ -94,13 +94,11 @@ public class Logger {
      * @param matrix - integer matrix will be printed
      */
     public static void log(int[][] matrix) {
-        String subString = "";
-       for(int[] array : matrix){
-           subString += SEP + "{" + getOneDimensionArray(array) + "}";
-       }
-        Logger.print("primitives matrix: {" +  subString + SEP +  "}");
+        String subString = getMatrix(matrix);
+        Logger.print("primitives matrix: {" +  subString + SEP + "}" );
     }
 
+    /*
     /**
      * Print integer multiDimension array
      *
@@ -109,18 +107,16 @@ public class Logger {
     public static void log(int[][][][] multiDimenArray) {
         String subString = "";
         for(int[][][] threeDimenArray : multiDimenArray){
-            subString += "{" + SEP;
+            subString += "{" ;
             for(int[][] twoDimenArray : threeDimenArray){
-                subString += "{" + SEP;
-                for(int[] oneDimenArray : twoDimenArray){
-                    subString += "{" + SEP ;
-                    subString +=  "{" + SEP +  getOneDimensionArray(oneDimenArray)+SEP + "}" + SEP;
-                }
-                subString += "}" + SEP;
+                subString +="{"  + "{" + getMatrix(twoDimenArray)+ "}"   ;
             }
-            subString += "}" + SEP ;
+            subString += "}"  ;
         }
         subString += "}";
+        subString=subString.replace(SEP,"");
+        subString=subString.replace("}",SEP+"}");
+        subString=subString.replace("{","{"+SEP);
         Logger.print("primitives multimatrix: " +  subString  );
     }
 
@@ -162,6 +158,7 @@ public class Logger {
 
     private static String getOneDimensionArray(int[] array) {
         String subString = "";
+        subString+="{";
         for(int i=0 ;i< array.length;i++) {
             if(i==0) {
                 subString += array[i];
@@ -173,7 +170,17 @@ public class Logger {
                 subString+=",";
             }
         }
+        subString+="}";
         return subString ;
+    }
+
+
+    private static String getMatrix(int[][] matrix) {
+        String subString = "";
+        for(int[] array : matrix){
+            subString += SEP + getOneDimensionArray(array) ;
+        }
+        return subString;
     }
 
     private static void checkString() {
