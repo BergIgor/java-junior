@@ -5,6 +5,7 @@ public class Logger {
     private static int sum=0;
     private static int countStr=0;
     private static String previousSubString = "" ;
+    private static final String SEP = System.lineSeparator();
 
     /**
      *  Print integer to console
@@ -86,6 +87,70 @@ public class Logger {
         Logger.print("reference: " +message.toString());
     }
 
+
+    /**
+     *Print integer matrix
+     *
+     * @param matrix - integer matrix will be printed
+     */
+    public static void log(int[][] matrix) {
+        String subString = "";
+       for(int[] array : matrix){
+           subString += SEP + "{" + getOneDimensionArray(array) + "}";
+       }
+        Logger.print("primitives matrix: {" +  subString + SEP +  "}");
+    }
+
+    /**
+     * Print integer multiDimension array
+     *
+     * @param multiDimenArray - integer multiDimension array will be printed
+      */
+    public static void log(int[][][][] multiDimenArray) {
+        String subString = "";
+        for(int[][][] threeDimenArray : multiDimenArray){
+            subString += "{" + SEP;
+            for(int[][] twoDimenArray : threeDimenArray){
+                subString += "{" + SEP;
+                for(int[] oneDimenArray : twoDimenArray){
+                    subString += "{" + SEP ;
+                    subString +=  "{" + SEP +  getOneDimensionArray(oneDimenArray)+SEP + "}" + SEP;
+                }
+                subString += "}" + SEP;
+            }
+            subString += "}" + SEP ;
+        }
+        subString += "}";
+        Logger.print("primitives multimatrix: " +  subString  );
+    }
+
+    /**
+     * Print sum of integers
+     *
+     * @param setInt - Set of integer
+     */
+    public static void log(int... setInt) {
+        int sum = 0;
+        for(int item:setInt){
+            sum += item;
+        }
+        Logger.print(String.valueOf(sum));
+    }
+
+    /**
+     * Print set of string
+     *
+     * @param args - Set of strings
+     */
+    public static void log(String... args) {
+        StringBuilder outputString = new StringBuilder("");
+        for(String subString: args) {
+            outputString.append(subString);
+            outputString.append(SEP);
+        }
+        Logger.print(outputString.toString());
+    }
+
     /**
      * This method will be called in the end tests
      */
@@ -94,6 +159,23 @@ public class Logger {
         Logger.checkInteger();
 
     }
+
+    private static String getOneDimensionArray(int[] array) {
+        String subString = "";
+        for(int i=0 ;i< array.length;i++) {
+            if(i==0) {
+                subString += array[i];
+            }
+            else{
+                subString += " " + array[i];
+            }
+            if(i!=array.length-1) {
+                subString+=",";
+            }
+        }
+        return subString ;
+    }
+
     private static void checkString() {
         if(countStr!=0){
             if(countStr>1) {
