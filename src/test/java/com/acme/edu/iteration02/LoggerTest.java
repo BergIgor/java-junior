@@ -22,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Ignore
+
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -45,7 +45,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         */
         //endregion
     }
-    @Ignore
+
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -70,7 +70,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         */
     }
 
-    @Ignore
+
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         /*
@@ -94,7 +94,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         */
     }
 
-    @Ignore
+
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
