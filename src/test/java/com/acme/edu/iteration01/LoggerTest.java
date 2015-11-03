@@ -21,7 +21,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
-
     @Ignore
     @Test
     public void shouldLogInteger() throws IOException {

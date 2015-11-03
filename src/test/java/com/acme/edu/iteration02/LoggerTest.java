@@ -1,5 +1,5 @@
 package com.acme.edu.iteration02;
-/*
+
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.Before;
@@ -26,6 +26,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
+        /*
         log("str 1");
         log(1);
         log(2);
@@ -41,12 +42,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "string: str 2" + SEP +
             "primitive: 0" + SEP
         );
+        */
         //endregion
     }
     @Ignore
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
+        /*
         Logger.log("str 1");
         Logger.log(10);
         Logger.log(Integer.MAX_VALUE);
@@ -64,11 +67,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "primitive: 0" + SEP
         );
         //endregion
+        */
     }
 
     @Ignore
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+        /*
         //region when
         log("str 1");
         log((byte)10);
@@ -86,21 +91,23 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "primitive: 0" + SEP
         );
         //endregion
+        */
     }
 
     @Ignore
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
-        Logger.log("str 1");
-        Logger.log("str 2");
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.log("str 2");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.close();
+        /*
+        Logger logger = new Logger();
+        logger("str 1");
+        logger("str 2");
+        logger("str 2");
+        logger(0);
+        logger("str 2");
+        logger("str 3");
+        logger("str 3");
+        logger("str 3");
         //endregion
 
         //region then
@@ -111,9 +118,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "string: str 2" + SEP +
             "string: str 3 (x3)"+ SEP
         );
+        */
         //endregion
     }
 
 
 }
-*/
