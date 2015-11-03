@@ -1,13 +1,12 @@
 package com.acme.edu;
 
+public class StringState extends State {
+    private String buffer="";
+    private int count=1;
 
-public class StringState implements  State {
-    private String buffer;
-    private Printer printer;
-    private int count;
 
     public StringState(Printer printer){
-        this.printer = printer;
+        super(printer);
     }
 
     public void log(String message) {
@@ -16,21 +15,30 @@ public class StringState implements  State {
         }
     }
 
-
+    @Override
     public void flush() {
         if(buffer.isEmpty()){
             return;
         }
         else {
-            if(count == 0) {
-                printer.print("string: " + buffer);
-            }
-            else if(count > 1) {
-                printer.print("string: " + buffer + " (x" + count + ")");
+            if(count > 1) {
+                getPrinter().print("string: " + buffer + " (x" + count + ")");
+                count = 0;
+            } else {
+                getPrinter().print("string: " + buffer);
             }
         }
         buffer = "";
-        count = 0;
     }
 
+    @Override
+    public void checkBuffer(String message) {
+        if (buffer.equals(message)) {
+            count++;
+        } else {
+            flush();
+            buffer = message;
+        }
+    }
 }
+
