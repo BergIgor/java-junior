@@ -10,13 +10,15 @@ import org.junit.Test;
 import org.junit.After;
 
 import java.io.IOException;
-
+@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String SEP =System.lineSeparator();
+    private Logger logger ;
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
         captureSysout();
+        logger = new Logger(new ConsolePrinter());
     }
     @After
     public void tearDown() {
@@ -28,7 +30,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log("str 1");
         logger.log(1);
         logger.log(2);
@@ -51,7 +52,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log("str 1");
         logger.log(10);
         logger.log(Integer.MAX_VALUE);
@@ -77,7 +77,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
 
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log("str 1");
         logger.log((byte) 10);
         logger.log((byte) Byte.MAX_VALUE);
@@ -98,11 +97,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     }
 
-    @Ignore
+
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log("str 1");
         logger.log("str 2");
         logger.log("str 2");
@@ -122,7 +120,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "string: str 2" + SEP +
             "string: str 3 (x3)"+ SEP
         );
-
         //endregion
     }
 

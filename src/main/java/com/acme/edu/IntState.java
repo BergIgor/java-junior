@@ -2,41 +2,34 @@ package com.acme.edu;
 
 public class IntState extends State {
     private int buffer=0;
+    private  Printer printer;
 
     public IntState(Printer printer){
-        super(printer);
+        this.printer = printer;
     }
 
-    public void log(String message) {
-        if ( Integer.parseInt(message) > Integer.MAX_VALUE){
-            getPrinter().print("primitive: " + message);
-        }else{
-            buffer += Integer.parseInt(message);
-        }
-    }
-
-
+    @Override
     public void flush() {
         if(buffer == 0) {
             return;
         }
-        getPrinter().print("primitive: " + buffer);
+        printer.print("primitive: " + buffer);
         buffer = 0;
     }
 
     @Override
-    public void checkBuffer(String message) {
+    public void log(String message) {
         int intMessage = Integer.parseInt(message);
         if (intMessage != 0 && intMessage < Integer.MAX_VALUE) {
             SumBuffer(intMessage);
         } else if (intMessage == Integer.MAX_VALUE) {
-            getPrinter().print("primitive: " + buffer);
-            getPrinter().print("primitive: " + Integer.MAX_VALUE);
+            printer.print("primitive: " + buffer);
+            printer.print("primitive: " + Integer.MAX_VALUE);
             buffer = 0;
         } else if (buffer == 0) {
-            getPrinter().print("primitive: " + 0);
+            printer.print("primitive: " + 0);
         } else {
-            getPrinter().print("primitive: " + message);
+            printer.print("primitive: " + message);
         }
     }
 
@@ -44,7 +37,7 @@ public class IntState extends State {
         int currentBuffer = buffer;
         buffer += message;
         if (buffer < currentBuffer && message > 0) {
-            getPrinter().print("primitive: " + currentBuffer);
+            printer.print("primitive: " + currentBuffer);
             buffer = message;
         }
     }

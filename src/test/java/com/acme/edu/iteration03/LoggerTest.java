@@ -10,15 +10,16 @@ import org.junit.Test;
 import org.junit.After;
 
 import java.io.IOException;
-
+@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-
+    private Logger logger ;
     private static final String SEP = System.lineSeparator();
     //region given
 
     @Before
     public void setUpSystemOut() throws IOException {
         captureSysout();
+        logger = new Logger(new ConsolePrinter());
     }
     @After
     public void tearDown() {
@@ -30,7 +31,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArray() throws IOException {
 
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log(new int[]{-1, 0, 1});
         //endregion
 
@@ -39,11 +39,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
     }
-    @Ignore
+
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
@@ -62,15 +61,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log(new int[][][][]{{{{0}}}});
         //endregion
 
         //region then
         assertSysoutEquals(
             "primitives multimatrix: {" + SEP +
-            "{" + SEP + "{" + SEP + "{" + SEP +
-            "0" + SEP +
+            "{" + SEP + "{" + SEP + "{"  +
+            "0"  +
             "}" + SEP + "}" + SEP + "}" + SEP +
             "}" + SEP
         );
@@ -81,7 +79,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log("str1", "string 2", "str 3");
         //endregion
 
@@ -94,7 +91,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log(-1, 0, 1, 3);
         //endregion
 
@@ -103,15 +99,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
     }
-    @Ignore
+    //@Ignore
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
-        Logger logger = new Logger(new ConsolePrinter());
         logger.log(1);
         logger.log("str");
         logger.log(Integer.MAX_VALUE - 10);
         logger.log(11);
+        logger.close();
         //endregion
 
         //region then

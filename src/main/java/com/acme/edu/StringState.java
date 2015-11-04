@@ -3,16 +3,10 @@ package com.acme.edu;
 public class StringState extends State {
     private String buffer="";
     private int count=1;
-
+    private  Printer printer;
 
     public StringState(Printer printer){
-        super(printer);
-    }
-
-    public void log(String message) {
-        if ( message.equals(buffer)){
-            count++;
-        }
+        this.printer = printer;
     }
 
     @Override
@@ -22,17 +16,17 @@ public class StringState extends State {
         }
         else {
             if(count > 1) {
-                getPrinter().print("string: " + buffer + " (x" + count + ")");
-                count = 0;
+                printer.print("string: " + buffer + " (x" + count + ")");
+                count = 1;
             } else {
-                getPrinter().print("string: " + buffer);
+                printer.print("string: " + buffer);
             }
         }
         buffer = "";
     }
 
     @Override
-    public void checkBuffer(String message) {
+    public void log(String message) {
         if (buffer.equals(message)) {
             count++;
         } else {
