@@ -7,10 +7,18 @@ public class DefaultState extends State {
         this.printer = printable;
     }
 
+    /**
+     * Cap
+     */
     @Override
     public void flush() {
     }
 
+    /**
+     * Log various string
+     *
+     * @param message - String will be logged
+     */
     @Override
     public void log(String message) {
         printer.print(message);

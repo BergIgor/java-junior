@@ -101,14 +101,16 @@ public class LoggerTest {
 
     @Test
     public void shouldAssertIntStateWithFactoryStateisNull() {
-        StateFactory factory = new StateFactory(printer);
+        Printer mockprinter = mock(Printer.class);
+        StateFactory factory = new StateFactory(mockprinter);
 
         assertEquals(IntState.class, factory.getInstanceIntState(null).getClass());
     }
 
     @Test
     public void shouldAssertEqualStringMockStringStateWithAFactoryInstanceStringState() {
-        StateFactory factory = new StateFactory(printer);
+        Printer mockprinter = mock(Printer.class);
+        StateFactory factory = new StateFactory(mockprinter);
         State stringStub = mock(StringState.class);
 
         assertEquals(IntState.class, factory.getInstanceIntState(stringStub).getClass());
@@ -116,10 +118,14 @@ public class LoggerTest {
 
     @Test
     public void shouldAssertEqualStringMockIntStateWithAFactoryInstanceIntState() {
-        StateFactory factory = new StateFactory(printer);
+        Printer mockprinter = mock(Printer.class);
+        StateFactory factory = new StateFactory(mockprinter);
         State intStub = mock(IntState.class);
 
         assertEquals(StringState.class, factory.getInstanceStringState(intStub).getClass());
     }
+
 }
+
+
 

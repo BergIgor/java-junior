@@ -8,6 +8,9 @@ public class IntState extends State {
         this.printer = printer;
     }
 
+    /**
+     *  Execute when state switched
+     */
     @Override
     public void flush() {
         if(buffer == 0) {
@@ -17,6 +20,11 @@ public class IntState extends State {
         buffer = 0;
     }
 
+    /**
+     * Check and Log string
+     *
+     * @param message - String will be logged
+     */
     @Override
     public void log(String message) {
         int intMessage = Integer.parseInt(message);

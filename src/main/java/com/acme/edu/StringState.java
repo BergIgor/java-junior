@@ -9,6 +9,9 @@ public class StringState extends State {
         this.printer = printer;
     }
 
+    /**
+     *  Execute when state switched
+     */
     @Override
     public void flush() {
         if(buffer.isEmpty()){
@@ -24,7 +27,11 @@ public class StringState extends State {
         }
         buffer = "";
     }
-
+    /**
+     * Compare String with buffer
+     *
+     * @param message - String will be logged
+     */
     @Override
     public void log(String message) {
         if (buffer.equals(message)) {

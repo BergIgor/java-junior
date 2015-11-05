@@ -95,7 +95,9 @@ public class Logger {
         logDifferentMessages("reference: ",message.toString());
     }
 
-
+    /**
+     *  Check and log buffer
+     */
     public void close() {
         state.flush();
     }
