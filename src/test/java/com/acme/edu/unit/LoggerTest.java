@@ -80,6 +80,15 @@ public class LoggerTest {
     }
 
     @Test
+    public void shouldLogIfParamIsObject() {
+        State state = new DefaultState(printer);
+        state.log(new String().toString());
+        state.flush();
+
+        verify(printer, times(1)).print("");
+}
+
+    @Test
     public void shouldLogNumberIfZeroBuffer() {
         State state = new IntState(printer);
         state.log(String.valueOf(0));
@@ -87,7 +96,7 @@ public class LoggerTest {
 
         verify(printer, times(1)).print("primitive: 0");
     }
-    
+
     @Test
     public void shouldntCallPrintForDefaultState() {
         State state = new DefaultState(printer);
