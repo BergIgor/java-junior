@@ -1,6 +1,7 @@
 package com.acme.edu.unit;
 
 import com.acme.edu.*;
+import com.acme.edu.Exception.DontPrintException;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class LoggerTest {
     //endregion
 
     @Test
-    public void shouldLogSumOfInt() {
+    public void shouldLogSumOfInt() throws DontPrintException{
         State state = new IntState(printer);
         state.log(String.valueOf(4));
         state.log(String.valueOf(0));
@@ -32,7 +33,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldntCallPrintForStringState() {
+    public void shouldntCallPrintForStringState() throws DontPrintException{
         State state = new StringState(printer);
         state.flush();
 
@@ -40,7 +41,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogIfIntValueIsMax() {
+    public void shouldLogIfIntValueIsMax() throws DontPrintException{
         State state = new IntState(printer);
         state.log(String.valueOf(10));
         state.log(String.valueOf(Integer.MAX_VALUE));
@@ -51,7 +52,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogIfExistDuplication() {
+    public void shouldLogIfExistDuplication() throws DontPrintException{
         State state = new StringState(printer);
         state.log("str 1");
         state.log("str 1");
@@ -62,7 +63,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldntCallPrintForIntState() {
+    public void shouldntCallPrintForIntState() throws DontPrintException{
         State state = new IntState(printer);
         state.flush();
 
@@ -70,7 +71,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogIfIntegerOverFlow() {
+    public void shouldLogIfIntegerOverFlow() throws DontPrintException{
         State state = new IntState(printer);
         state.log(String.valueOf(Integer.MAX_VALUE - 15));
         state.log(String.valueOf(17));
@@ -80,7 +81,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogIfParamIsObject() {
+    public void shouldLogIfParamIsObject() throws DontPrintException{
         State state = new DefaultState(printer);
         state.log(new String().toString());
         state.flush();
@@ -89,7 +90,7 @@ public class LoggerTest {
 }
 
     @Test
-    public void shouldLogNumberIfZeroBuffer() {
+    public void shouldLogNumberIfZeroBuffer() throws DontPrintException{
         State state = new IntState(printer);
         state.log(String.valueOf(0));
         state.flush();
@@ -98,7 +99,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldntCallPrintForDefaultState() {
+    public void shouldntCallPrintForDefaultState() throws DontPrintException{
         State state = new DefaultState(printer);
         state.flush();
 
@@ -106,7 +107,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogIfBothValueString() {
+    public void shouldLogIfBothValueString() throws DontPrintException{
         State state = new StringState(printer);
         state.log(String.valueOf(5));
         state.log(String.valueOf(Integer.MAX_VALUE));

@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.Exception.DontPrintException;
+
 /**
  * Class IntState extends Class State.
  */
@@ -15,7 +17,7 @@ public class IntState extends State {
      *  Execute when state switched
      */
     @Override
-    public void flush() {
+    public void flush() throws DontPrintException{
         if(buffer == 0) {
             return;
         }
@@ -29,7 +31,7 @@ public class IntState extends State {
      * @param message - String will be logged
      */
     @Override
-    public void log(String message) {
+    public void log(String message) throws  DontPrintException{
         int intMessage = Integer.parseInt(message);
         if (intMessage != 0 && intMessage < Integer.MAX_VALUE) {
             SumBuffer(intMessage);
@@ -44,7 +46,7 @@ public class IntState extends State {
         }
     }
 
-    private void SumBuffer(int message) {
+    private void SumBuffer(int message) throws DontPrintException{
         int currentBuffer = buffer;
         buffer += message;
         if (buffer < currentBuffer && message > 0) {

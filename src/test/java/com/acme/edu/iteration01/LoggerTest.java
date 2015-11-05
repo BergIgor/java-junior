@@ -1,5 +1,8 @@
 package com.acme.edu.iteration01;
 
+import com.acme.edu.Exception.DontPrintException;
+import com.acme.edu.Exception.NullMessageException;
+import com.acme.edu.Exception.PreviousNullStateException;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.Printer;
@@ -27,7 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() throws IOException {
+    public void shouldLogInteger() throws IOException,PreviousNullStateException,DontPrintException {
 
         //region when
         logger.log(1);
@@ -45,7 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogByte() throws IOException {
+    public void shouldLogByte() throws IOException,PreviousNullStateException,DontPrintException {
 
         //region when
         logger.log((byte) 1);
@@ -65,7 +68,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //TODO: implement Logger solution to match specification as tests
 
     @Test
-    public void shouldLogChar() throws IOException {
+    public void shouldLogChar() throws IOException,NullMessageException,PreviousNullStateException,DontPrintException {
 
         //region when
         logger.log('a');
@@ -82,7 +85,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() throws IOException {
+    public void shouldLogString() throws IOException,NullMessageException,PreviousNullStateException,DontPrintException {
         //region when
         logger.log("test string 1");
         logger.log("other str");
@@ -99,7 +102,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogBoolean() throws IOException {
+    public void shouldLogBoolean() throws IOException,PreviousNullStateException,DontPrintException {
 
         //region when
         logger.log(true);
@@ -116,7 +119,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogReference() throws IOException {
+    public void shouldLogReference() throws IOException,PreviousNullStateException,NullMessageException,DontPrintException {
 
         //region when
         logger.log(new Object());

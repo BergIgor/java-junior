@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.Exception.DontPrintException;
+
 /**
  *  Class StringState extends Class State.
  */
@@ -16,7 +18,7 @@ public class StringState extends State {
      *  Execute when state switched
      */
     @Override
-    public void flush() {
+    public void flush()throws DontPrintException{
         if(buffer.isEmpty()){
             return;
         }
@@ -36,7 +38,7 @@ public class StringState extends State {
      * @param message - String will be logged
      */
     @Override
-    public void log(String message) {
+    public void log(String message)throws DontPrintException{
         if (buffer.equals(message)) {
             count++;
         } else {

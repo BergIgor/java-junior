@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.Exception.DontPrintException;
+
 /**
  * Class DefaultState extends Class State.
  */
@@ -23,7 +25,7 @@ public class DefaultState extends State {
      * @param message - String will be logged
      */
     @Override
-    public void log(String message) {
+    public void log(String message) throws DontPrintException{
         printer.print(message);
     }
 }
