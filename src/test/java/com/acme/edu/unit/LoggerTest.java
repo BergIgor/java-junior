@@ -5,12 +5,14 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
 public class LoggerTest {
 
     private Printer printer;
+
     //region given
     @Before
     public void setUp() throws IOException {
@@ -19,7 +21,7 @@ public class LoggerTest {
     //endregion
 
     @Test
-    public void shouldLogSumOfInt(){
+    public void shouldLogSumOfInt() {
         State state = new IntState(printer);
         state.log(String.valueOf(4));
         state.log(String.valueOf(0));
@@ -28,6 +30,7 @@ public class LoggerTest {
 
         verify(printer, times(1)).print("primitive: 7");
     }
+
     @Test
     public void shouldntCallPrintForStringState() {
         State state = new StringState(printer);
@@ -92,7 +95,31 @@ public class LoggerTest {
         state.log(String.valueOf(Integer.MAX_VALUE));
         state.flush();
 
-        verify(printer, times(1)).print("string: 5" );
-        verify(printer, times(1)).print("string: " + Integer.MAX_VALUE );
+        verify(printer, times(1)).print("string: 5");
+        verify(printer, times(1)).print("string: " + Integer.MAX_VALUE);
+    }
+
+    @Test
+    public void shouldAssertIntStateWithFactoryStateisNull() {
+        StateFactory factory = new StateFactory(printer);
+
+        assertEquals(IntState.class, factory.getInstanceIntState(null).getClass());
+    }
+
+    @Test
+    public void shouldAssertEqualStringMockStringStateWithAFactoryInstanceStringState() {
+        StateFactory factory = new StateFactory(printer);
+        State stringStub = mock(StringState.class);
+
+        assertEquals(IntState.class, factory.getInstanceIntState(stringStub).getClass());
+    }
+
+    @Test
+    public void shouldAssertEqualStringMockIntStateWithAFactoryInstanceIntState() {
+        StateFactory factory = new StateFactory(printer);
+        State intStub = mock(IntState.class);
+
+        assertEquals(StringState.class, factory.getInstanceStringState(intStub).getClass());
     }
 }
+
