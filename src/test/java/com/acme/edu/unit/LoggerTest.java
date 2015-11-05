@@ -87,6 +87,14 @@ public class LoggerTest {
 
         verify(printer, times(1)).print("primitive: 0");
     }
+    
+    @Test
+    public void shouldntCallPrintForDefaultState() {
+        State state = new DefaultState(printer);
+        state.flush();
+
+        verify(printer, times(0)).print("");
+    }
 
     @Test
     public void shouldLogIfBothValueString() {
