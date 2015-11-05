@@ -1,5 +1,6 @@
 package com.acme.edu.iteration02;
 
+import com.acme.edu.Exception.DontPrintException;
 import com.acme.edu.Exception.PreviousNullStateException;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
@@ -29,7 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws IOException,PreviousNullStateException {
+    public void shouldLogSequentIntegersAsSum() throws IOException,PreviousNullStateException,DontPrintException {
         //region when
         logger.log("str 1");
         logger.log(1);
@@ -51,7 +52,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws IOException,PreviousNullStateException {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws IOException,PreviousNullStateException,DontPrintException {
         //region when
         logger.log("str 1");
         logger.log(10);
@@ -75,7 +76,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws IOException,PreviousNullStateException{
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws IOException,PreviousNullStateException,DontPrintException{
 
         //region when
         logger.log("str 1");
@@ -100,7 +101,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException,PreviousNullStateException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException,PreviousNullStateException,DontPrintException {
         //region when
         logger.log("str 1");
         logger.log("str 2");
