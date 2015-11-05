@@ -29,7 +29,7 @@ public class LoggerTest {
         verify(printer, times(1)).print("primitive: 7");
     }
     @Test
-    public void shouldLogEmptyString() {
+    public void shouldntCallPrintForStringState() {
         State state = new StringState(printer);
         state.flush();
 
@@ -59,6 +59,14 @@ public class LoggerTest {
     }
 
     @Test
+    public void shouldntCallPrintForIntState() {
+        State state = new IntState(printer);
+        state.flush();
+
+        verify(printer, times(0)).print("");
+    }
+
+    @Test
     public void shouldLogIfIntegerOverFlow() {
         State state = new IntState(printer);
         state.log(String.valueOf(Integer.MAX_VALUE - 15));
@@ -69,11 +77,22 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogNumberIfEmptyBuffer() {
+    public void shouldLogNumberIfZeroBuffer() {
         State state = new IntState(printer);
         state.log(String.valueOf(0));
         state.flush();
 
         verify(printer, times(1)).print("primitive: 0");
+    }
+
+    @Test
+    public void shouldLogIfBothValueString() {
+        State state = new StringState(printer);
+        state.log(String.valueOf(5));
+        state.log(String.valueOf(Integer.MAX_VALUE));
+        state.flush();
+
+        verify(printer, times(1)).print("string: 5" );
+        verify(printer, times(1)).print("string: " + Integer.MAX_VALUE );
     }
 }
