@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+/**
+ * Class IntState extends Class State.
+ */
 public class IntState extends State {
     private int buffer=0;
     private  Printer printer;

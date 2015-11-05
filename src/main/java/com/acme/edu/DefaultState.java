@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+/**
+ * Class DefaultState extends Class State.
+ */
 public class DefaultState extends State {
     private Printer printer;
 

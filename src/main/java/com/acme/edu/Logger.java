@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+/**
+ * Class Logger have to log messages
+ */
 public class Logger {
     private StateFactory stateFactory;
     private State state;

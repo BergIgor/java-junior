@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+/**
+ *  Class StringState extends Class State.
+ */
 public class StringState extends State {
     private String buffer="";
     private int count=1;

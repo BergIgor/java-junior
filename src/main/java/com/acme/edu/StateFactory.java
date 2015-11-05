@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+/**
+ * Class StateFactory have to create various types State
+ */
 public class StateFactory {
     public static State intState;
     public static State stringState;
