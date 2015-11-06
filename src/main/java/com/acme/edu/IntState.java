@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.Exception.DontPrintException;
+import com.acme.edu.Exception.LogException;
 
 /**
  * Class IntState extends Class State.
@@ -9,6 +9,10 @@ public class IntState extends State {
     private int buffer=0;
     private  Printer printer;
 
+    /**
+     * IntState constructor
+     * @param printer - Printer will be printed
+     */
     public IntState(Printer printer){
         this.printer = printer;
     }
@@ -17,7 +21,7 @@ public class IntState extends State {
      *  Execute when state switched
      */
     @Override
-    public void flush() throws DontPrintException{
+    public void flush() throws LogException{
         if(buffer == 0) {
             return;
         }
@@ -31,7 +35,7 @@ public class IntState extends State {
      * @param message - String will be logged
      */
     @Override
-    public void log(String message) throws  DontPrintException{
+    public void log(String message) throws LogException{
         int intMessage = Integer.parseInt(message);
         if (intMessage != 0 && intMessage < Integer.MAX_VALUE) {
             SumBuffer(intMessage);
@@ -46,7 +50,7 @@ public class IntState extends State {
         }
     }
 
-    private void SumBuffer(int message) throws DontPrintException{
+    private void SumBuffer(int message) throws LogException{
         int currentBuffer = buffer;
         buffer += message;
         if (buffer < currentBuffer && message > 0) {

@@ -1,13 +1,18 @@
 package com.acme.edu;
 
+import com.acme.edu.Exception.LogException;
 /**
  * Class StateFactory have to create various types State
  */
 public class StateFactory {
-    public static State intState;
-    public static State stringState;
-    public static State defaultState;
+    private State intState;
+    private State stringState;
+    private State defaultState;
 
+    /**
+     * StateFactory constructor
+     * @param printer
+     */
     public StateFactory(Printer printer) {
         intState = new IntState(printer);
         stringState = new StringState(printer);
@@ -17,28 +22,31 @@ public class StateFactory {
     /**
      * Create state of type IntState
      *
-     * @param state - State will be created
      * @return IntState
      */
-    public State getInstanceIntState(State state) {
+    public State getInstanceIntState(State state) throws LogException{
+        if ( state != null && state != intState) {
+            state.flush();
+        }
         return intState;
     }
     /**
      * Create state of type StringState
      *
-     * @param state - State will be created
      * @return StringState
      */
-    public State getInstanceStringState(State state) {
+    public State getInstanceStringState(State state) throws LogException{
+        if ( state != null && state != stringState) {
+            state.flush();
+        }
         return stringState;
     }
     /**
      * Create state of type DefaultState
      *
-     * @param state - State will be created
      * @return DefaultState
      */
-    public State getInstanceDefaultState(State state) {
+    public State getInstanceDefaultState()  {
         return defaultState;
     }
 }

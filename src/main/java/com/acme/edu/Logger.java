@@ -1,8 +1,8 @@
 package com.acme.edu;
 
-import com.acme.edu.Exception.DontPrintException;
+import com.acme.edu.Exception.LogException;
 import com.acme.edu.Exception.NullMessageException;
-import com.acme.edu.Exception.PreviousNullStateException;
+import com.acme.edu.Exception.StateNullException;
 
 /**
  * Class Logger have to log messages
@@ -12,9 +12,13 @@ public class Logger {
     private State state;
     private static final String SEP = System.lineSeparator();
 
+    /**
+     * Logger constructor
+     * @param printer
+     */
     public Logger(Printer printer) {
         stateFactory = new StateFactory(printer);
-        state = stateFactory.getInstanceStringState(null);
+        state = stateFactory.getInstanceDefaultState();
     }
 
     /**
@@ -22,13 +26,7 @@ public class Logger {
      *
      * @param message - int will be logged
      */
-    public void log(int message) throws  PreviousNullStateException, DontPrintException{
-        if(state == null){
-            throw new PreviousNullStateException("");
-        }
-        if ( state != null && state != stateFactory.intState) {
-            state.flush();
-        }
+    public void log(int message) throws  LogException{
         state = stateFactory.getInstanceIntState(state);
         state.log(String.valueOf(message));
     }
@@ -38,12 +36,9 @@ public class Logger {
      *
      * @param message - String will be logged
      */
-    public void log(String message) throws  PreviousNullStateException,DontPrintException{
-        if(state == null){
-            throw new PreviousNullStateException();
-        }
-        if ( state != null && state != stateFactory.stringState) {
-            state.flush();
+    public void log(String message) throws  LogException{
+        if(message == null){
+            throw new LogException(new NullMessageException("String is null"));
         }
         state = stateFactory.getInstanceStringState(state);
         state.log(message);
@@ -53,7 +48,7 @@ public class Logger {
      *
      * @param message - character will be logged
      */
-    public void log(char message) throws NullMessageException,DontPrintException{
+    public void log(char message) throws LogException{
         logDifferentMessages("char: ", String.valueOf(message));
     }
 
@@ -62,7 +57,7 @@ public class Logger {
      *
      * @param message - boolean value will logged
      */
-    public void log(boolean message) throws DontPrintException{
+    public void log(boolean message) throws LogException{
         logDifferentMessages("primitive: ", String.valueOf(message));
     }
     /**
@@ -70,9 +65,9 @@ public class Logger {
      *
      * @param messages - set of integer value will logged
      */
-    public void log(int... messages) throws NullMessageException,DontPrintException{
+    public void log(int... messages) throws LogException {
         if(messages==null){
-            throw new NullMessageException("Null vararg");
+            throw new LogException( new NullMessageException("Vararg is null"));
         }
         logDifferentMessages("", getSumOfIntSet(messages));
     }
@@ -81,9 +76,9 @@ public class Logger {
      *
      * @param matrix - integer matrix will be logged
      */
-    public void log(int[][] matrix) throws NullMessageException,DontPrintException{
+    public void log(int[][] matrix) throws LogException{
         if(matrix==null){
-            throw new NullMessageException("Null vararg");
+            throw new LogException( new NullMessageException("Matrix is null"));
         }
         logDifferentMessages("primitives matrix: {", getMatrix(matrix) + SEP + "}");
     }
@@ -92,9 +87,9 @@ public class Logger {
      *
      * @param multiDimenArray - integer multiDimension array will be logged
      */
-    public void log(int[][][][] multiDimenArray) throws NullMessageException,DontPrintException{
+    public void log(int[][][][] multiDimenArray) throws LogException{
         if(multiDimenArray==null){
-            throw new NullMessageException("Null vararg");
+            throw new LogException( new NullMessageException("MultiDimenArray is null"));
         }
         logDifferentMessages("primitives multimatrix: ", getMultiDimensionArray(multiDimenArray));
     }
@@ -104,9 +99,9 @@ public class Logger {
      *
      * @param args - Set of strings will be logged
      */
-    public void log(String... args) throws NullMessageException,DontPrintException{
+    public void log(String... args) throws LogException{
         if(args==null){
-            throw new NullMessageException("Null vararg");
+            throw new LogException( new NullMessageException("Vararg string is null"));
         }
         logDifferentMessages("", getStringOfStringSet(args));
     }
@@ -116,9 +111,9 @@ public class Logger {
      *
      * @param message - reference value will be logged
      */
-    public void log(Object message) throws NullMessageException,DontPrintException{
+    public void log(Object message) throws LogException{
         if(message==null){
-            throw new NullMessageException();
+            throw new LogException( new NullMessageException("Object is null"));
         }
         logDifferentMessages("reference: ",message.toString());
     }
@@ -126,17 +121,17 @@ public class Logger {
     /**
      *  Check and log buffer
      */
-    public void close() throws PreviousNullStateException,DontPrintException{
+    public void close() throws LogException{
         if(state==null){
-            throw new PreviousNullStateException();
+            throw new LogException( new StateNullException());
         }
         else {
             state.flush();
         }
     }
 
-    private void logDifferentMessages(String typeString, String message) throws  DontPrintException{
-        state = stateFactory.getInstanceDefaultState(state);
+    private void logDifferentMessages(String typeString, String message) throws LogException{
+        state = stateFactory.getInstanceDefaultState();
         state.log(typeString + message);
     }
 

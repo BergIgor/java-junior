@@ -1,18 +1,17 @@
 package com.acme.edu.Exception;
 
-
 import java.security.PrivilegedActionException;
-
 /**
- * Exception will be throw when client try to log a null message.
+ * Exception will be thrown if client is trying to communicate by State
+ * object have got a value null.
  */
-public class NullMessageException extends Exception{
+public class StateNullException extends Exception {
     /**
      * Constructs a new exception with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
      */
-    public NullMessageException() {
+    public StateNullException() {
     }
 
     /**
@@ -23,7 +22,7 @@ public class NullMessageException extends Exception{
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public NullMessageException(String message) {
+    public StateNullException(String message) {
         super(message);
     }
 
@@ -41,7 +40,7 @@ public class NullMessageException extends Exception{
      *                unknown.)
      * @since 1.4
      */
-    public NullMessageException(String message, Throwable cause) {
+    public StateNullException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -59,7 +58,7 @@ public class NullMessageException extends Exception{
      *              unknown.)
      * @since 1.4
      */
-    public NullMessageException(Throwable cause) {
+    public StateNullException(Throwable cause) {
         super(cause);
     }
 
@@ -77,7 +76,7 @@ public class NullMessageException extends Exception{
      *                           be writable
      * @since 1.7
      */
-    public NullMessageException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public StateNullException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
