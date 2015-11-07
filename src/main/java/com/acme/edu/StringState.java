@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.Exception.LogException;
+import com.acme.edu.Exception.StateNullException;
 
 /**
  *  Class StringState extends Class State.
@@ -8,30 +9,30 @@ import com.acme.edu.Exception.LogException;
 public class StringState extends State {
     private String buffer="";
     private int count=1;
-    private  Printer printer;
+    //private  Printer printer;
 
     /**
      * StringState constructor
-     * @param printer - Printer will be printed
+     * @param printers - Printer will be printed
      */
-    public StringState(Printer printer){
-        this.printer = printer;
+    public StringState(Printer... printers){
+            super(printers);
     }
 
     /**
      *  Execute when state switched
      */
     @Override
-    public void flush()throws LogException{
+    public void flush()throws StateNullException{
         if(buffer.isEmpty()){
             return;
         }
         else {
             if(count > 1) {
-                printer.print("string: " + buffer + " (x" + count + ")");
+                println("string: " + buffer + " (x" + count + ")");
                 count = 1;
             } else {
-                printer.print("string: " + buffer);
+                println("string: " + buffer);
             }
         }
         buffer = "";
@@ -42,7 +43,7 @@ public class StringState extends State {
      * @param message - String will be logged
      */
     @Override
-    public void log(String message)throws LogException{
+    public void log(String message)throws StateNullException{
         if (buffer.equals(message)) {
             count++;
         } else {

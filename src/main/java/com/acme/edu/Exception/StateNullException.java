@@ -5,7 +5,7 @@ import java.security.PrivilegedActionException;
  * Exception will be thrown if client is trying to communicate by State
  * object have got a value null.
  */
-public class StateNullException extends Exception {
+public class StateNullException extends LogException {
     /**
      * Constructs a new exception with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a

@@ -1,9 +1,8 @@
 package com.acme.edu.iteration02;
 
+import com.acme.edu.*;
+import com.acme.edu.Exception.DontPrintException;
 import com.acme.edu.Exception.LogException;
-import com.acme.edu.Logger;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.ConsolePrinter;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -14,11 +13,12 @@ import java.io.IOException;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String SEP =System.lineSeparator();
     private Logger logger ;
+    private StateFactory stateFactory;
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() throws IOException,DontPrintException {
         captureSysout();
-        logger = new Logger(new ConsolePrinter());
+        logger = new Logger(new ConsolePrinter(),new FilePrinter("UTF-8"));
     }
     @After
     public void tearDown() {

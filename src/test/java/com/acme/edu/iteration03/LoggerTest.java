@@ -1,25 +1,24 @@
 package com.acme.edu.iteration03;
 
+import com.acme.edu.*;
+import com.acme.edu.Exception.DontPrintException;
 import com.acme.edu.Exception.LogException;
-import com.acme.edu.Logger;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.ConsolePrinter;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.After;
 
 import java.io.IOException;
-@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private Logger logger ;
+    private StateFactory stateFactory;
     private static final String SEP = System.lineSeparator();
     //region given
 
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() throws IOException,DontPrintException {
         captureSysout();
-        logger = new Logger(new ConsolePrinter());
+        logger = new Logger(new ConsolePrinter(),new FilePrinter("UTF-8"));
     }
     @After
     public void tearDown() {
@@ -99,7 +98,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
     }
-    //@Ignore
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException, LogException {
         //region when
@@ -116,8 +114,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("primitive: " + (Integer.MAX_VALUE - 10));
         assertSysoutContains("primitive: 11");
         //endregion
-
     }
-
-
 }

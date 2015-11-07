@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 import com.acme.edu.Exception.LogException;
+import com.acme.edu.Exception.StateNullException;
+
 /**
  * Class StateFactory have to create various types State
  */
@@ -11,12 +13,12 @@ public class StateFactory {
 
     /**
      * StateFactory constructor
-     * @param printer
+     * @param printers
      */
-    public StateFactory(Printer printer) {
-        intState = new IntState(printer);
-        stringState = new StringState(printer);
-        defaultState = new DefaultState(printer);
+    public StateFactory(Printer... printers) {
+        intState = new IntState(printers);
+        stringState = new StringState(printers);
+        defaultState = new DefaultState(printers);
     }
 
     /**
@@ -24,7 +26,7 @@ public class StateFactory {
      *
      * @return IntState
      */
-    public State getInstanceIntState(State state) throws LogException{
+    public State getInstanceIntState(State state) throws StateNullException{
         if ( state != null && state != intState) {
             state.flush();
         }
@@ -35,7 +37,7 @@ public class StateFactory {
      *
      * @return StringState
      */
-    public State getInstanceStringState(State state) throws LogException{
+    public State getInstanceStringState(State state) throws StateNullException{
         if ( state != null && state != stringState) {
             state.flush();
         }

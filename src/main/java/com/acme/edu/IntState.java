@@ -1,31 +1,32 @@
 package com.acme.edu;
 
 import com.acme.edu.Exception.LogException;
+import com.acme.edu.Exception.StateNullException;
 
 /**
  * Class IntState extends Class State.
  */
 public class IntState extends State {
     private int buffer=0;
-    private  Printer printer;
+    //private  Printer printer;
 
     /**
      * IntState constructor
-     * @param printer - Printer will be printed
+     * @param printers - Printer will be printed
      */
-    public IntState(Printer printer){
-        this.printer = printer;
+    public IntState(Printer... printers){
+        super(printers);
     }
 
     /**
      *  Execute when state switched
      */
     @Override
-    public void flush() throws LogException{
+    public void flush()throws StateNullException{
         if(buffer == 0) {
             return;
         }
-        printer.print("primitive: " + buffer);
+        println("primitive: " + buffer);
         buffer = 0;
     }
 
@@ -35,26 +36,26 @@ public class IntState extends State {
      * @param message - String will be logged
      */
     @Override
-    public void log(String message) throws LogException{
+    public void log(String message) throws StateNullException{
         int intMessage = Integer.parseInt(message);
         if (intMessage != 0 && intMessage < Integer.MAX_VALUE) {
             SumBuffer(intMessage);
         } else if (intMessage == Integer.MAX_VALUE) {
-            printer.print("primitive: " + buffer);
-            printer.print("primitive: " + Integer.MAX_VALUE);
+            println("primitive: " + buffer);
+            println("primitive: " + Integer.MAX_VALUE);
             buffer = 0;
         } else if (buffer == 0) {
-            printer.print("primitive: " + 0);
+            println("primitive: " + 0);
         } else {
-            printer.print("primitive: " + message);
+            println("primitive: " + message);
         }
     }
 
-    private void SumBuffer(int message) throws LogException{
+    private void SumBuffer(int message) throws StateNullException{
         int currentBuffer = buffer;
         buffer += message;
         if (buffer < currentBuffer && message > 0) {
-            printer.print("primitive: " + currentBuffer);
+            println("primitive: " + currentBuffer);
             buffer = message;
         }
     }

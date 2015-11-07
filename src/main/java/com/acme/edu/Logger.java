@@ -14,10 +14,10 @@ public class Logger {
 
     /**
      * Logger constructor
-     * @param printer
+     * @param printers
      */
-    public Logger(Printer printer) {
-        stateFactory = new StateFactory(printer);
+    public Logger(Printer... printers) {
+        stateFactory = new StateFactory(printers);
         state = stateFactory.getInstanceDefaultState();
     }
 
@@ -38,7 +38,7 @@ public class Logger {
      */
     public void log(String message) throws  LogException{
         if(message == null){
-            throw new LogException(new NullMessageException("String is null"));
+            throw new NullMessageException("String is null");
         }
         state = stateFactory.getInstanceStringState(state);
         state.log(message);
@@ -67,7 +67,7 @@ public class Logger {
      */
     public void log(int... messages) throws LogException {
         if(messages==null){
-            throw new LogException( new NullMessageException("Vararg is null"));
+            throw new NullMessageException("Vararg is null");
         }
         logDifferentMessages("", getSumOfIntSet(messages));
     }
@@ -78,7 +78,7 @@ public class Logger {
      */
     public void log(int[][] matrix) throws LogException{
         if(matrix==null){
-            throw new LogException( new NullMessageException("Matrix is null"));
+            throw  new NullMessageException("Matrix is null");
         }
         logDifferentMessages("primitives matrix: {", getMatrix(matrix) + SEP + "}");
     }
@@ -89,7 +89,7 @@ public class Logger {
      */
     public void log(int[][][][] multiDimenArray) throws LogException{
         if(multiDimenArray==null){
-            throw new LogException( new NullMessageException("MultiDimenArray is null"));
+            throw new NullMessageException("MultiDimenArray is null");
         }
         logDifferentMessages("primitives multimatrix: ", getMultiDimensionArray(multiDimenArray));
     }
@@ -101,7 +101,7 @@ public class Logger {
      */
     public void log(String... args) throws LogException{
         if(args==null){
-            throw new LogException( new NullMessageException("Vararg string is null"));
+            throw new NullMessageException("Vararg string is null");
         }
         logDifferentMessages("", getStringOfStringSet(args));
     }
@@ -113,7 +113,7 @@ public class Logger {
      */
     public void log(Object message) throws LogException{
         if(message==null){
-            throw new LogException( new NullMessageException("Object is null"));
+            throw new NullMessageException("Object is null");
         }
         logDifferentMessages("reference: ",message.toString());
     }
@@ -123,7 +123,7 @@ public class Logger {
      */
     public void close() throws LogException{
         if(state==null){
-            throw new LogException( new StateNullException());
+            throw new StateNullException("Don't close a Null State");
         }
         else {
             state.flush();
