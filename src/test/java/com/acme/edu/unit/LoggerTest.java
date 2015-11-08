@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-@Ignore
+
 public class LoggerTest {
 
     private Printer printer;
