@@ -29,7 +29,6 @@ public class FilePrinter implements Printer {
     }
 
     public void print(String message) throws DontPrintException{
-        File file = new File("output.txt");
         try{
             if (countOfLogs < 50){
                 str.append(message);
@@ -46,14 +45,4 @@ public class FilePrinter implements Printer {
         }
     }
 
-    public void stop()throws DontPrintException{
-        try {
-            if (bufferWriter == null) return;
-            bufferWriter.write(str.toString());
-            str.delete(0, str.length());
-            bufferWriter.close();
-        } catch (IOException e) {
-            throw new DontPrintException(e);
-        }
-    }
 }

@@ -24,7 +24,7 @@ public class LoggerTest {
     //endregion
 
     @Test
-    public void shouldLogSumOfInt() throws  DontPrintException,LogException{
+    public void shouldLogSumOfInt() throws  LogException{
 
         printer = mock(ConsolePrinter.class);
         State state = new IntState(printer);
@@ -35,13 +35,12 @@ public class LoggerTest {
 
         verify(printer, times(1)).print("primitive: 7");
     }
-    @Ignore
+
     @Test
-    public void shouldntThrowsNullMessageExceptionForStringState() throws  LogException,DontPrintException{
+    public void shouldntThrowsNullMessageExceptionForStringState() throws  LogException{
         State state = new StringState(printer);
 
         state.log(null);
-        state.flush();
 
         verify(printer, times(0)).print("");
     }
@@ -74,7 +73,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shoudLogIfUseDefaultState() throws DontPrintException, LogException {
+    public void shoudLogIfUseDefaultState() throws  LogException {
         State state  = new DefaultState(printer);
         state.log("char: a");
         state.log("primitive: boolean");
@@ -146,19 +145,7 @@ public class LoggerTest {
 
         verify(factoryMock).getInstanceIntState(anyObject());
     }
-    @Ignore
-    @Test
-    public void shouldVerifyThatThereWasCallOfGetStringStateMethodOfStateManagerClassIfUseLogger() throws  LogException {
-        StateFactory factoryMock = mock(StateFactory.class);
-        State state = mock(StringState.class);
-        Logger logger = new Logger(printer);
 
-        when(factoryMock.getInstanceStringState(anyObject())).thenReturn(state);
-
-        logger.log("str 2");
-
-        verify(factoryMock).getInstanceStringState(anyObject());
-    }
 
     @Test(expected = LogException.class)
     public void shouldThrowExceptionIfTryLogArrayIntNull() throws  LogException {
@@ -268,7 +255,6 @@ public class LoggerTest {
 
         verify(stringStub).flush();
     }
-
 
 }
 
