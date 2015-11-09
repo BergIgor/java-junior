@@ -42,10 +42,10 @@ public class RemotePrinter {
     public void print(String message) throws DontPrintException{
         try{
             if (countOfLogs < 50){
-                str.append(message);
+                str.append(message + SEP);
                 countOfLogs++;
             }else {
-                bufferWriter.write(message+SEP);
+                bufferWriter.write(str.toString());
                 str.delete(0, str.length());
                 countOfLogs = 0;
                 bufferWriter.flush();

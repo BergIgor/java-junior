@@ -14,7 +14,9 @@ public class Server {
     public static void main(String[] args) throws DontPrintException{
         try {
             String currentString;
-            File file = new File("output.txt");
+
+            File file = new File("logOutput.txt");
+
             ServerSocket serverSocket = new ServerSocket(7777);
 
             Socket client = serverSocket.accept();
@@ -26,7 +28,6 @@ public class Server {
             while((currentString=bufferedReader.readLine())!=null){
                 remotePrinter.print(currentString);
             }
-
         }
         catch (IOException e){
             throw  new DontPrintException(e);

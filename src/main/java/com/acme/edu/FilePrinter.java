@@ -30,15 +30,8 @@ public class FilePrinter implements Printer {
 
     public void print(String message) throws DontPrintException{
         try{
-            if (countOfLogs < 50){
-                str.append(message);
-                countOfLogs++;
-            }else {
-                bufferWriter.write(message+SEP);
-                str.delete(0, message.length());
-                countOfLogs = 0;
-                bufferWriter.flush();
-            }
+            bufferWriter.write(message+SEP);
+            bufferWriter.flush();
         }
         catch (IOException e) {
             throw new DontPrintException(e);
