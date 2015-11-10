@@ -1,6 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.Exception.LogException;
 import com.acme.edu.Exception.StateNullException;
 
 import java.util.List;
@@ -10,11 +9,9 @@ import java.util.List;
  */
 public class DefaultState extends State {
 
-    private List<Printer> printer;
-
     /**
      * DefaultState constructor
-     * @param printers - Printer will be printed
+     * @param printers - Printers will be printed
      */
         public DefaultState(Printer... printers) {
             super(printers);

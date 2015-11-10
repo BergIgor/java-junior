@@ -6,9 +6,9 @@ import java.io.*;
 
 public class FilePrinter implements Printer {
     private String SEP = System.lineSeparator();
-    private static StringBuilder str = new StringBuilder("");
+    private StringBuilder str = new StringBuilder("");
     private BufferedWriter bufferWriter;
-    private static int countOfLogs = 0;
+    private int countOfLogs = 0;
 
     /**
      * Constructor FilePriner

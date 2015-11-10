@@ -9,7 +9,6 @@ import com.acme.edu.Exception.StateNullException;
 public class StringState extends State {
     private String buffer="";
     private int count=1;
-    //private  Printer printer;
 
     /**
      * StringState constructor

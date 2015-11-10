@@ -11,12 +11,11 @@ import java.util.List;
 
 public class RemotePrinter {
 
-    private  BufferedWriter bufferWriter;
-    private  BufferedReader bufferReader;
+    private BufferedWriter bufferWriter;
+    private BufferedReader bufferReader;
     private Socket socket;
-    private static StringBuilder str = new StringBuilder("");
     private List<String> buffMess = new LinkedList<String>();
-    private static int countOfLogs = 0;
+    private int countOfLogs = 0;
     private String SEP = System.lineSeparator();
 
     public RemotePrinter(File fileName,String codeString) throws DontPrintException {
