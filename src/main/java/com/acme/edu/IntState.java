@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.exception.StateNullException;
+import com.acme.edu.Exception.StateNullException;
 
 /**
  * Class IntState extends Class State.

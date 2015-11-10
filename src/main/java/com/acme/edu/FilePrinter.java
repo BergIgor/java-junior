@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.exception.DontPrintException;
+import com.acme.edu.Exception.DontPrintException;
 
 import java.io.*;
 

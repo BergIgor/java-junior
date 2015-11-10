@@ -1,13 +1,15 @@
 package com.acme.edu.Exception;
 
 import java.security.PrivilegedActionException;
+
 /**
+ * Class StateNullException
  * Exception will be thrown if client is trying to communicate by State
  * object have got a value null.
  */
 public class StateNullException extends LogException {
     /**
-     * Constructs a new exception with {@code null} as its detail message.
+     * Constructs a new Exception with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
      */
@@ -15,7 +17,7 @@ public class StateNullException extends LogException {
     }
 
     /**
-     * Constructs a new exception with the specified detail message.  The
+     * Constructs a new Exception with the specified detail message.  The
      * cause is not initialized, and may subsequently be initialized by
      * a call to {@link #initCause}.
      *
@@ -27,10 +29,10 @@ public class StateNullException extends LogException {
     }
 
     /**
-     * Constructs a new exception with the specified detail message and
+     * Constructs a new Exception with the specified detail message and
      * cause.  <p>Note that the detail message associated with
      * {@code cause} is <i>not</i> automatically incorporated in
-     * this exception's detail message.
+     * this Exception's detail message.
      *
      * @param message the detail message (which is saved for later retrieval
      *                by the {@link #getMessage()} method).
@@ -45,7 +47,7 @@ public class StateNullException extends LogException {
     }
 
     /**
-     * Constructs a new exception with the specified cause and a detail
+     * Constructs a new Exception with the specified cause and a detail
      * message of <tt>(cause==null ? null : cause.toString())</tt> (which
      * typically contains the class and detail message of <tt>cause</tt>).
      * This constructor is useful for exceptions that are little more than
@@ -62,21 +64,4 @@ public class StateNullException extends LogException {
         super(cause);
     }
 
-    /**
-     * Constructs a new exception with the specified detail message,
-     * cause, suppression enabled or disabled, and writable stack
-     * trace enabled or disabled.
-     *
-     * @param message            the detail message.
-     * @param cause              the cause.  (A {@code null} value is permitted,
-     *                           and indicates that the cause is nonexistent or unknown.)
-     * @param enableSuppression  whether or not suppression is enabled
-     *                           or disabled
-     * @param writableStackTrace whether or not the stack trace should
-     *                           be writable
-     * @since 1.7
-     */
-    public StateNullException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }
