@@ -1,9 +1,7 @@
 package com.acme.edu.unit;
 
 import com.acme.edu.*;
-import com.acme.edu.Exception.DontPrintException;
 import com.acme.edu.Exception.LogException;
-import com.acme.edu.Exception.StateNullException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

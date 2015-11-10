@@ -6,6 +6,7 @@ import com.acme.edu.Exception.StateNullException;
  *  Class StringState extends Class State.
  */
 public class StringState extends State {
+    private static final String STRING = "string: ";
     private String buffer="";
     private int count=1;
 
@@ -27,10 +28,10 @@ public class StringState extends State {
         }
         else {
             if(count > 1) {
-                println("string: " + buffer + " (x" + count + ")");
+                println(STRING + buffer + " (x" + count + ")");
                 count = 1;
             } else {
-                println("string: " + buffer);
+                println(STRING + buffer);
             }
         }
         buffer = "";

@@ -6,8 +6,8 @@ import com.acme.edu.Exception.StateNullException;
  * Class IntState extends Class State.
  */
 public class IntState extends State {
+    private static final String PRIMITIVE = "primitive: ";
     private int buffer=0;
-    //private  Printer printer;
 
     /**
      * IntState constructor
@@ -25,7 +25,7 @@ public class IntState extends State {
         if(buffer == 0) {
             return;
         }
-        println("primitive: " + buffer);
+        println(PRIMITIVE + buffer);
         buffer = 0;
     }
 
@@ -38,23 +38,23 @@ public class IntState extends State {
     public void log(String message) throws StateNullException{
         int intMessage = Integer.parseInt(message);
         if (intMessage != 0 && intMessage < Integer.MAX_VALUE) {
-            SumBuffer(intMessage);
+            sumBuffer(intMessage);
         } else if (intMessage == Integer.MAX_VALUE) {
-            println("primitive: " + buffer);
-            println("primitive: " + Integer.MAX_VALUE);
+            println(PRIMITIVE + buffer);
+            println(PRIMITIVE + Integer.MAX_VALUE);
             buffer = 0;
         } else if (buffer == 0) {
-            println("primitive: " + 0);
+            println(PRIMITIVE + 0);
         } else {
-            println("primitive: " + message);
+            println(PRIMITIVE + message);
         }
     }
 
-    private void SumBuffer(int message) throws StateNullException{
+    private void sumBuffer(int message) throws StateNullException{
         int currentBuffer = buffer;
         buffer += message;
         if (buffer < currentBuffer && message > 0) {
-            println("primitive: " + currentBuffer);
+            println(PRIMITIVE + currentBuffer);
             buffer = message;
         }
     }

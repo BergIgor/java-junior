@@ -6,9 +6,7 @@ import java.io.*;
 
 public class FilePrinter implements Printer {
     private String SEP = System.lineSeparator();
-    private StringBuilder str = new StringBuilder("");
     private BufferedWriter bufferWriter;
-    private int countOfLogs = 0;
 
     /**
      * Constructor FilePriner
@@ -28,6 +26,7 @@ public class FilePrinter implements Printer {
         }
     }
 
+    @Override
     public void print(String message) throws DontPrintException{
         try{
             bufferWriter.write(message+SEP);
