@@ -5,13 +5,17 @@ import com.acme.edu.Exception.DontPrintException;
 import java.io.*;
 import java.net.ServerSocket;
 import  java.net.Socket;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class RemotePrinter {
 
     private  BufferedWriter bufferWriter;
+    private  BufferedReader bufferReader;
     private Socket socket;
     private static StringBuilder str = new StringBuilder("");
+    private List<String> buffMess = new LinkedList<String>();
     private static int countOfLogs = 0;
     private String SEP = System.lineSeparator();
 
@@ -32,6 +36,7 @@ public class RemotePrinter {
             socket=new Socket(hostName, portNumber);
 
             bufferWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            bufferReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }
         catch (IOException e){
             throw new DontPrintException(e);
@@ -42,13 +47,27 @@ public class RemotePrinter {
     public void print(String message) throws DontPrintException{
         try{
             if (countOfLogs < 50){
-                str.append(message + SEP);
+                if(message.indexOf("ERROR")>=0) {
+                    buffMess.add(0, message + SEP);
+                }
+                else{
+                    buffMess.add( message + SEP );
+                }
                 countOfLogs++;
             }else {
-                bufferWriter.write(str.toString());
-                str.delete(0, str.length());
+                bufferWriter.write(buffMess.toString());
+                buffMess.clear();
                 countOfLogs = 0;
                 bufferWriter.flush();
+                /*
+                while (true) {
+                    if (bufferReader.ready()) {
+                        if ("ERROR".equals(bufferReader.readLine())) {
+                        } else {
+                            break;
+                        }
+                    }
+                }*/
             }
         }
         catch (IOException e) {
@@ -59,8 +78,8 @@ public class RemotePrinter {
     public void stop()throws DontPrintException{
         try {
             if (bufferWriter == null) return;
-            bufferWriter.write(str.toString());
-            str.delete(0, str.length());
+            bufferWriter.write(buffMess.toString());
+            buffMess.clear();
             bufferWriter.close();
         } catch (IOException e) {
             throw new DontPrintException(e);
