@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.Exception.DontPrintException;
+import com.acme.edu.exception.DontPrintException;
 
 /**
  * Interface Printer with one method print()

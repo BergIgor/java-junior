@@ -1,8 +1,8 @@
 package com.acme.edu;
 
-import com.acme.edu.Exception.LogException;
-import com.acme.edu.Exception.NullMessageException;
-import com.acme.edu.Exception.StateNullException;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.NullMessageException;
+import com.acme.edu.exception.StateNullException;
 
 /**
  * Class Logger have to log messages

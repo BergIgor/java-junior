@@ -1,8 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.Exception.StateNullException;
-
-import java.util.List;
+import com.acme.edu.exception.StateNullException;
 
 /**
  * Class DefaultState extends Class State.
